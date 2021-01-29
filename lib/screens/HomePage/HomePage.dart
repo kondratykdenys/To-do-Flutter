@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_list/components/TaskView.dart';
 import 'package:flutter_to_do_list/constants.dart';
+import 'package:flutter_to_do_list/screens/HomePage/Today.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,7 +13,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: TaskView(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (var item in TodayData().today)
+              TaskView(
+                title: item.title,
+                isChecked: item.isChecked,
+              )
+          ],
+        ),
+      ),
     );
   }
 
@@ -21,7 +32,7 @@ class _HomePageState extends State<HomePage> {
       title: Row(
         children: [
           Container(
-              padding: EdgeInsets.all(45),
+              margin: EdgeInsets.all(40),
               child: Text(
                 'Today',
                 style: TextStyle(
@@ -44,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {},
               ),
             ),
-          )
+          ),
         ],
       ),
       elevation: 0,
